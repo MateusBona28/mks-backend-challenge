@@ -6,10 +6,8 @@ RUN mkdir -p /home/node/app
 
 WORKDIR /home/node/app
 
-COPY "package.json" .
+COPY . .
 
 RUN npm install
-
-COPY . .
 
 CMD ["yarn", "start:dev"]
