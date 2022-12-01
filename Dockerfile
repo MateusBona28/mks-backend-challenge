@@ -1,13 +1,11 @@
 FROM node:16.15.1
 
-USER node
+WORKDIR /app
 
-RUN mkdir -p /home/node/app
+COPY "package.json" .
 
-WORKDIR /home/node/app
+RUN yarn
 
 COPY . .
-
-RUN npm install
 
 CMD ["yarn", "start:dev"]
