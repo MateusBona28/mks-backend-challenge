@@ -1,6 +1,10 @@
 FROM node:16.15.1
 
-WORKDIR /app
+USER node
+
+RUN mkdir -p /home/node/app
+
+WORKDIR /home/node/app
 
 COPY "package.json" .
 
