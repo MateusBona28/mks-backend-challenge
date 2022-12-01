@@ -1,26 +1,91 @@
-import { Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { UpdateMovieDto } from './dto/update-movie.dto';
+import { Movie } from './entities/movie.entity';
 
 @Injectable()
 export class MoviesService {
-  create(createMovieDto: CreateMovieDto) {
-    return 'This action adds a new movie';
+  constructor(
+    @InjectRepository(Movie)
+    private moviesRepository: Repository<Movie>,
+  ) {}
+
+  async create(createMovieDto: CreateMovieDto) {
+    const { title, duration } = createMovieDto;
+
+    const movieAlreadyExists = await this.findOneByTitle(title);
+
+    if (movieAlreadyExists) {
+      throw new BadRequestException('movie already exists');
+    }
+
+    const movieData = {
+      title,
+      duration,
+    };
+
+    this.moviesRepository.create(movieData);
+    const newMovie = await this.moviesRepository.save(movieData);
+
+    return newMovie;
   }
 
-  findAll() {
-    return `This action returns all movies`;
+  async findAll() {
+    return await this.moviesRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} movie`;
+  async findOne(id: string) {
+    const movie = await this.moviesRepository.findOneBy({ id });
+
+    if (!movie) {
+      throw new NotFoundException('movie not found');
+    }
+
+    return movie;
   }
 
-  update(id: number, updateMovieDto: UpdateMovieDto) {
-    return `This action updates a #${id} movie`;
+  async update(id: string, updateMovieDto: UpdateMovieDto) {
+    const movie = await this.moviesRepository.findOneBy({ id });
+
+    if (!movie) {
+      throw new NotFoundException('movie not found');
+    }
+
+    const validatedData = {
+      ...movie,
+      ...updateMovieDto,
+    };
+
+    const { title, duration } = validatedData;
+
+    const updatedMovie = {
+      id,
+      title,
+      duration,
+    };
+
+    await this.moviesRepository.update(id, updatedMovie);
+
+    return updatedMovie;
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} movie`;
+  async remove(id: string) {
+    const movie = await this.moviesRepository.findOneBy({ id });
+
+    if (!movie) {
+      throw new NotFoundException('movie not found');
+    }
+
+    await this.moviesRepository.delete({ id });
+  }
+
+  async findOneByTitle(title: string) {
+    return await this.moviesRepository.findOneBy({ title });
   }
 }
