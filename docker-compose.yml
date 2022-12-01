@@ -2,12 +2,14 @@ version: "3.9"
 
 services:
   api:
-    container_name: api
-    build: .
+    container_name: api_dev
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
     ports:
       - 3000:3000
     environment:
-      - DB_HOST=database
+      - DB_HOST=database_dev
       - DB_PASSWORD=1234
       - DB_USER=developer
       - DB=backend-challenge
@@ -19,7 +21,7 @@ services:
       - .:/app
 
   db:
-    container_name: database
+    container_name: database_dev
     image: postgres:latest
     ports:
       - 5431:5432
@@ -35,6 +37,7 @@ services:
       start_period: 5s
     
   redis:
+    container_name: redis_dev
     image: redis
     command: redis-server --requirepass 1234 --appendonly yes
     hostname: redis
