@@ -33,3 +33,13 @@ services:
       timeout: 5s
       retries: 5
       start_period: 5s
+    
+  redis:
+    image: redis
+    command: redis-server --requirepass 1234 --appendonly yes
+    hostname: redis
+    ports:
+      - "6379:6379"
+      - "13333:8001"
+    volumes:
+      - /home/duducp/Redis:/var/lib/postgresql/data
