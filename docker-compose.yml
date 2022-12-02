@@ -1,25 +1,25 @@
 version: "3.9"
 
 services:
-  api:
-    container_name: api
+  api_mateusbona28:
+    container_name: api_mateusbona28
     build: .
     ports:
       - 3000:3000
     environment:
-      - DB_HOST=database
+      - DB_HOST=database_mateusbona28
       - DB_PASSWORD=1234
       - DB_USER=developer
       - DB=backend-challenge
       - SECRET_KEY=secret
     depends_on:
-      db:
+      db_mateusbona28:
         condition: service_healthy
     volumes:
       - .:/app
 
-  db:
-    container_name: database
+  db_mateusbona28:
+    container_name: database_mateusbona28
     image: postgres:latest
     ports:
       - 5431:5432
@@ -34,7 +34,8 @@ services:
       retries: 5
       start_period: 5s
     
-  redis:
+  redis_mateusbona28:
+    container_name: redis_mateusbona28
     image: redis
     command: redis-server --requirepass 1234 --appendonly yes
     hostname: redis
