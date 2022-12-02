@@ -36,6 +36,6 @@
   - Ao abrir o projeto no seu editor de código, abra o arquivo Dockerfile e garanta que a versão node que está instalada na sua máquina é
     a mesma que o output do código acima, isso vai garantir que as dependências de desenvolvimento que você instalou localmente vão estar na mesma versão das que o docker vai utilizar.
   - Após isso, mais comandos no terminal:
-    - docker-compose up ( não esqueça de adicionar o prefixo de privilégios de usuário para poder executar caso esteja utilizando um
+    - docker-compose up --build ( não esqueça de adicionar o prefixo de privilégios de usuário para poder executar caso esteja utilizando um
     sistema operacional de distribuição linux ou macOS ( sudo,  brew, etc... ))
   - E pronto! Aplicação local rodando, agora é só acessar a documentação e consumir os endpoints
