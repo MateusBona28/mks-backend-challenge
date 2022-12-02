@@ -1,15 +1,17 @@
 # MKS-BACKEND-CHALLENGE
 - Bom dia/tarde/noite, me chamo Mateus Bonacina, tenho 20 anos e abaixo estão as instruções para rodar este projeto!
 
+## Tempo de experiência:
+
 ## STACK UTILIZADA NO PROJETO:
-- TypeScript
-- PostgreSQL
-- Redis
-- TypeORM
-- Nestjs
-- Docker
-- Swagger
-- AWS
+- TypeScript - 6 mesês de experiência
+- PostgreSQL - 6 mesês de experiência
+- Redis - Precisei aprender para realizar o desafio - 3 dias de expêriencia
+- TypeORM - 6 mesês de experiência
+- Nestjs - Precisei aprender para realizar o desafio - 3 dias de expêriencia, porém tenho experiência de 6 mesês com Express.js
+- Docker - 5 mesês de experiência
+- Swagger - 1 mês de experiência
+- AWS - Precisei aprender para realizar o desafio.
 
 ## LINKS:
 
